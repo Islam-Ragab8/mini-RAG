@@ -1,16 +1,16 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, Depends
 import os
 # from dotenv import load_dotenv
 # load_dotenv()
-from helpers.config import get_settings
+from helpers.config import get_settings, Settings
 
 base_router = APIRouter()
 
 @base_router.get("/")
-async def welcome():
-    settings= get_settings()
-    app_name = settings.APP_NAME.value
-    app_version = settings.APP_VERSION.value
+async def welcome(app_settings:Settings = Depends(get_settings)):
+    # settings= get_settings()
+    app_name = app_settings.APP_NAME
+    app_version = app_settings.APP_VERSION
     return {
 
         "app_name": app_name,
