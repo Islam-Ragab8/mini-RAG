@@ -28,7 +28,7 @@ async def upload_data(project_id:str, file: UploadFile, app_setting:Settings = D
             }
         )
     project_dir_path=ProjectController().get_project_path(project_id=project_id)
-    file_path=DataController().generate_unique_filename(
+    file_path , file_id = DataController().generate_unique_filename(
         original_filename=file.filename,      
         project_id=project_id          
     )
